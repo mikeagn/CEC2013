@@ -1,11 +1,8 @@
-+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
-+     Benchmark Functions for CEC'2013 Special Session and Competition on      =
-+            Niching Methods for Multimodal Function Optimization              =
-+        Xiaodong Li, Andries Engelbrecht, and Michael G. Epitropakis          =
-+                                                                              =
-+ Version    : 1.0                                                             =
-+ Developers : Michael G. Epitropakis and Xiaodong Li                          =
-+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+Benchmark Functions for CEC'2013 Special Session and Competition on Niching Methods for Multimodal Function Optimization
+========================================================================================================================
+*Organizers : Xiaodong Li, Andries Engelbrecht, and Michael G. Epitropakis
+Version    : 1.0
+Developers : Michael G. Epitropakis and Xiaodong Li*
 
 If you are using any material from the current competition please cite the
 following work:
