@@ -7,8 +7,8 @@ Benchmark Functions for CEC'2013 Special Session and Competition on Niching Meth
 *Developers : Michael G. Epitropakis and Xiaodong Li*
 
 Please refer to:
-http://goanna.cs.rmit.edu.au/~xiaodong/cec13-niching/
-http://goanna.cs.rmit.edu.au/~xiaodong/cec13-niching/competition/
+- http://goanna.cs.rmit.edu.au/~xiaodong/cec13-niching/
+- http://goanna.cs.rmit.edu.au/~xiaodong/cec13-niching/competition/
 
 
 If you are using any material from the current competition please cite the
@@ -52,6 +52,7 @@ In the FILENAME folder you will find the following folder structure:
 
 After unpacking the archive file, you should end up with the following
 structure:
+<pre>
 
   ./			The MAIN directory, created when unpacking
    |
@@ -70,11 +71,13 @@ structure:
    +-- java 	Source code of the benchmark functions in JAVA
        |
        +- CEC2013	Project files
+</pre>
 
 --------------------------------------------------------------------------------
 -- MATLAB: 
 --------------------------------------------------------------------------------
 The matlab folder contains: 
+<pre>
 + niching_func.m
 |-- 	The source code of the benchmark functions
 |
@@ -107,12 +110,14 @@ The matlab folder contains:
 |
 + get_ub.m
 |-- 	For each function, get the upper bounds of the optimization box
+</pre>
 
 --------------------------------------------------------------------------------
 -- C++:
 --------------------------------------------------------------------------------
 The c++ folder contains: 
 
+<pre>
 + main.cpp:
 |-- 	Examples on how to use each benchmark functions.
 |
@@ -145,6 +150,7 @@ The c++ folder contains:
 |
 + sortidx.h
 |-- 	Help header file for sorting
+</pre>
 
 --------------------------------------------------------------------------------
 - Compilation 
@@ -175,7 +181,8 @@ the competition in the Java programming language.
 
 --------------------------------------------------------------------------------
 -- LICENSE
--- This folder should contain a file with the license statement (LICENSE.txt)
+--------------------------------------------------------------------------------
+This folder should contain a file with the license statement (LICENSE.txt)
 --------------------------------------------------------------------------------
 Copyright 2013, Michael G. Epitropakis, Xiaodong Li, and Andries Engelbrecht. 
 All rights reserved.
