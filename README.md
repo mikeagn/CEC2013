@@ -1,8 +1,15 @@
 Benchmark Functions for CEC'2013 Special Session and Competition on Niching Methods for Multimodal Function Optimization
 ========================================================================================================================
-*Organizers : Xiaodong Li, Andries Engelbrecht, and Michael G. Epitropakis
-Version    : 1.0
-Developers : Michael G. Epitropakis and Xiaodong Li*
+*Organizers : Xiaodong Li, Andries Engelbrecht, and Michael G. Epitropakis*
+
+*Version    : 1.0*
+
+*Developers : Michael G. Epitropakis and Xiaodong Li*
+
+Please refer to:
+http://goanna.cs.rmit.edu.au/~xiaodong/cec13-niching/
+http://goanna.cs.rmit.edu.au/~xiaodong/cec13-niching/competition/
+
 
 If you are using any material from the current competition please cite the
 following work:
