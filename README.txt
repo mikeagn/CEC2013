@@ -3,7 +3,7 @@
 +            Niching Methods for Multimodal Function Optimization              =
 +        Xiaodong Li, Andries Engelbrecht, and Michael G. Epitropakis          =
 +                                                                              =
-+ Version    : 1.0                                                             =
++ Version    : 1.0.1                                                             =
 + Developers : Michael G. Epitropakis and Xiaodong Li                          =
 +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
 
