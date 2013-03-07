@@ -165,9 +165,15 @@ set. Please follow the demonstration file ExampleUsage.java on how to use the
 source code. To reproduce the figures from the technical report please execute
 the Plots.java file.
 
-ACKNOWLEDGEMENT: We really want to thank Dr. Jerry Swan for his fruitful comments
-and suggestions that helped to improve, the design and the implementation of
-the competition in the Java programming language. 
+--------------------------------------------------------------------------------
+-- ACKNOWLEDGEMENT: 
+--------------------------------------------------------------------------------
+
+- We really want to thank Dr. Jerry Swan for his fruitful comments and
+  suggestions that helped to improve, the design and the implementation of the
+  competition in the Java programming language. 
+- We also thank Dr. Daniel Molina Cabrera, for finding and correcting a bug in
+  the Java source code.
 
 --------------------------------------------------------------------------------
 -- LICENSE

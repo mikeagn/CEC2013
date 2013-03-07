@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -164,6 +165,27 @@ public final class CEC2013 {
 		return seeds;
 	}
 
+	public static class CompareByFitness implements Comparator<Integer> {
+		private ArrayList<Double> fitness;
+
+		public CompareByFitness(ArrayList<Double> fitness) {
+			this.fitness = fitness;
+		}
+		@Override
+		public int compare(Integer o1, Integer o2) {
+			double f1 = fitness.get(o1);
+			double f2 = fitness.get(o2);
+
+			if (f1 < f2)
+				return 1;
+			else if (f1 > f2)
+				return -1;
+			else 
+				return 0;
+		}
+	}
+
+
 	/**
 	 * This function calculates the number of global optima that exists inside a population  
 	 * @param pop the population of the potential solutions
@@ -187,13 +209,18 @@ public final class CEC2013 {
 			fits.add(pFunc.evaluate(indi));
 
 		/* sorted_pop: sort population by fitness */
-		Map<Double, Integer> map = new TreeMap<Double, Integer>();
-		for (int i = 0; i < fits.size(); ++i)
-			map.put(fits.get(i), i);
+		CompareByFitness compare = new CompareByFitness(fits);
+		ArrayList<Integer> idx = new ArrayList<Integer>();
 
-		Collection<Integer> idx = ((TreeMap<Double, Integer>) map).descendingMap().values();
-		for (Integer i : idx) 
+		for (int i=0; i < pop.size(); i++) {
+			idx.add(i);
+		}
+
+		Collections.sort(idx, compare);
+
+		for (Integer i : idx) {
 			sorted_pop.add(pop.get(i));
+		}
 
 		/* find seeds in the temp population */
 		ArrayList<ArrayList<Double>> seedstmp = new ArrayList<ArrayList<Double>>();
