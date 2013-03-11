@@ -174,6 +174,8 @@ the Plots.java file.
   competition in the Java programming language. 
 - We also thank Dr. Daniel Molina Cabrera, for finding and correcting a bug in
   the Java source code.
+- We also thank Dr. Catalin Stoean, for finding and correcting a bug in
+  the source code.
 
 --------------------------------------------------------------------------------
 -- LICENSE
