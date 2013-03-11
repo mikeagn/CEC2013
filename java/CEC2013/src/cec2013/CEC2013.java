@@ -71,7 +71,7 @@ public final class CEC2013 {
 	 */
 	private static int [] nopt_ = new int[] { 
 		2, 5, 1, 4, 2, 18, 36, 81, 216, 12, 
-		6, 8, 6, 6, 8, 6, 8, 6, 6, 8};
+		6, 8, 6, 6, 8, 6, 8, 6, 8, 8};
 
 	/**
 	 * Store the maximum number of function evaluation per function. 

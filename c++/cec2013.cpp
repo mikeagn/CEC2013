@@ -65,7 +65,7 @@ void CEC2013::init_vars_()
 	nopt_[5] = 18; nopt_[6] = 36; nopt_[7] = 81; nopt_[8] = 216;
 	nopt_[9] = 12; nopt_[10] = 6; nopt_[11] = 8; nopt_[12] = 6;
 	nopt_[13] = 6; nopt_[14] = 8; nopt_[15] = 6; nopt_[16] = 8;
-	nopt_[17] = 6; nopt_[18] = 6; nopt_[19] = 8;
+	nopt_[17] = 6; nopt_[18] = 8; nopt_[19] = 8;
 
 	maxfes_[0] = maxfes_[1] = maxfes_[2] = maxfes_[3] = maxfes_[4] = 50000;
 	maxfes_[5] = maxfes_[6] = maxfes_[9] = maxfes_[10] = maxfes_[11] = maxfes_[12] = 200000;
