@@ -44,7 +44,7 @@ class CFunction
 public:
 	CFunction();
 	CFunction(const int &dim, const int &nofunc);
-	~CFunction();
+	virtual ~CFunction();
 
 	virtual tFitness evaluate(const double *x) = 0;
 	double get_lbound(const int &ivar) const { return lbound_[ivar]; } 
