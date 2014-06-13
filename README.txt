@@ -176,6 +176,8 @@ the Plots.java file.
   the Java source code.
 - We also thank Dr. Catalin Stoean, for finding and correcting a bug in
   the source code.
+- We also thank Dr. Mike Preuss, for his valuable help and contributions on the
+  competition.
 
 --------------------------------------------------------------------------------
 -- LICENSE
