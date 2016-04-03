@@ -2,7 +2,7 @@ Benchmark Functions for CEC'2013 Special Session and Competition on Niching Meth
 ========================================================================================================================
 *Organizers : Xiaodong Li, Andries Engelbrecht, and Michael G. Epitropakis*
 
-*Version    : 1.0.1*
+*Version    : 1.1*
 
 *Developers : Michael G. Epitropakis and Xiaodong Li*
 
@@ -27,7 +27,7 @@ In this folder you can find all necessary source files for the benchmark suite
 of the CEC'2013 Special Session and Competition on Niching Methods for
 Multimodal Function Optimization. 
 
-The Test suite for the competition is implemented in MATLAB and C++.
+The Test suite for the competition is implemented in MATLAB, JAVA, C/C++ and python.
 
 --------------------------------------------------------------------------------
 - Documentation:
@@ -62,15 +62,21 @@ structure:
    |   |
    |   +- data		Data files for the benchmark suite 
    |
-   +-- c++		Source code of the benchmark functions in C
+   +-- c++		Source code of the benchmark functions in C/C++
    |   |
    |   +- plots		Figures of the benchmark function (for validation)
    |   |
    |   +- data		Data files for the benchmark suite 
    |
    +-- java 	Source code of the benchmark functions in JAVA
+   |   |
+   |   +- CEC2013	Project files
+   |
+   +-- python	Source code of the benchmark functions in python
        |
        +- CEC2013	Project files
+       |
+       +- data		Data files for the benchmark suite 
 </pre>
 
 --------------------------------------------------------------------------------
@@ -113,7 +119,7 @@ The matlab folder contains:
 </pre>
 
 --------------------------------------------------------------------------------
--- C++:
+-- C/C++:
 --------------------------------------------------------------------------------
 The c++ folder contains: 
 
@@ -176,6 +182,14 @@ source code. To reproduce the figures from the technical report please execute
 the Plots.java file.
 
 --------------------------------------------------------------------------------
+-- python:
+--------------------------------------------------------------------------------
+
+The python folder contains all necessary files to use the competition function
+set. Please follow the demonstration file demo.py on how to use the
+source code. 
+
+--------------------------------------------------------------------------------
 -- ACKNOWLEDGEMENT: 
 --------------------------------------------------------------------------------
 
@@ -188,6 +202,9 @@ the Plots.java file.
   source code.
 - We also thank Dr. Mike Preuss, for his valuable help and contributions on the
   competition.
+- We really want to thank Eduardo Nobre Luis, and Fabricio Olivetti de Franca for 
+  providing us a first implementation of the competition in python. This version 
+  help us to redesign and re-implement the required infrastructure in python. 
 
 --------------------------------------------------------------------------------
 -- LICENSE

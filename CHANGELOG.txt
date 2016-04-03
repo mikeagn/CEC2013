@@ -31,3 +31,10 @@ Correct number of global optima for function 18 from 6 to 8. Thanks to Catalin
 Stoean
 -get_no_goptima.m, line 10,
 nopt = [2 5 1 4 2 18 36 81 216 12 6 8 6 6 8 6 8 6 8 8];
+-------------------------------------------------------------------------------
+-- python source code
+-------------------------------------------------------------------------------
+3 April 2016, 21:00PM
+Initial implementation of the competition's infrastructure in python. Special 
+thanks to Eduardo Nobre Luis, and Fabricio Olivetti de Franca for providing us 
+a first implementation in python.
