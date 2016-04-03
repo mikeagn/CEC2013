@@ -34,11 +34,34 @@ Machine Learning Group, RMIT University, Australia, 2013.
 
 In addition, please properly cite the algorithms:
 
-# TODO: add appropriate references for the algorithms.
-
 For the ALNM please properly cite:
+# TODO: find appropriate reference for the algorithm.
+
 For the LSEA_EA please properly cite:
+
+J. E. Fieldsend, "Using an adaptive collection of local evolutionary algorithms
+for multi-modal problems," Soft Computing, vol. Advance online publication.
+	doi: 10.1007/s00500-014-1309-6, 2014.
+
 For the LSEA_GP please properly cite:
+
+J. E. Fieldsend, "Multi-Modal Optimisation using a Localised Surrogates
+Assisted Evolutionary Algorithm," in UK Workshop on Computational Intelligence
+(UKCI 2013), 2013, pp. 88–95.
+
 For the MEA please properly cite:
+
+R. K. Ursem, "Multinational evolutionary algorithms," in Proceedings of the
+Congress on Evolutionary Computation, 1999, pp. 1633–1640.
+
 For the MSSPSO please properly cite:
+
+J. Zhang, D.-S. Huang, and K.-H. Liu, "Multi-Sub-Swarm Optimization Algorithm
+for Multimodal Function Optimization," in IEEE Congress on Evolutionary
+Computation, 2007, pp. 3215–3220.
+
 For the NMMSO please properly cite:
+
+J. E. Fieldsend, "Running Up Those Hills: Multi-Modal Search with the Niching
+Migratory Multi-Swarm Optimiser," in IEEE Congress on Evolutionary Computation,
+2014, pp. 2593 - 2600.
