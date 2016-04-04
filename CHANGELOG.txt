@@ -1,4 +1,10 @@
 -------------------------------------------------------------------------------
+-- All programming languages
+-------------------------------------------------------------------------------
+-- 4 April 2016, 21:00PM
+Increased accuracy for the fitness values of shubert, and six_hump_camel_back.
+Many thanks to Francesco Fracchia for noting this to us
+-------------------------------------------------------------------------------
 -- C++ version
 -------------------------------------------------------------------------------
 11 March 2013, 9:31PM
@@ -6,6 +12,7 @@ Correct number of global optima for function 18 from 6 to 8. Thanks to Catalin
 Stoean
 -cec2013.cpp line 68: nopt_[17] = 6; nopt_[18] = 8; nopt_[19] = 8;
 
+-------------------------
 4 March 2013, 12:43PM
 We just changed the line 40 in cec2013.h:
 double nopt_[20]; with int nopt_[20];
@@ -20,13 +27,17 @@ Stoean
         2, 5, 1, 4, 2, 18, 36, 81, 216, 12,
         6, 8, 6, 6, 8, 6, 8, 6, 8, 8};
 
+-------------------------
 7 March 2013, 10:00AM
 Found a bug in CEC2013.java, fixed method howManyGlobalOptimaInPopulation
 The bug was in the Map procedure used to sort the population by its fitness.
 -------------------------------------------------------------------------------
 -- MATLAB source code
 -------------------------------------------------------------------------------
-11 March 2013, 9:31PM
+-- 4 April 2016, 21:00PM
+Added get_dimension.m get_maxfes.m functions and updated the demo_suite.m script
+-------------------------
+-- 11 March 2013, 9:31PM
 Correct number of global optima for function 18 from 6 to 8. Thanks to Catalin
 Stoean
 -get_no_goptima.m, line 10,

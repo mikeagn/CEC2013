@@ -205,6 +205,8 @@ source code.
 - We really want to thank Eduardo Nobre Luis, and Fabricio Olivetti de Franca for 
   providing us a first implementation of the competition in python. This version 
   help us to redesign and re-implement the required infrastructure in python. 
+- We also thank Francesco Fracchia, for finding and correcting the fitness
+  value accuracy for shubert function
 
 --------------------------------------------------------------------------------
 -- LICENSE
