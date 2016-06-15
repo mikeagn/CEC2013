@@ -207,6 +207,8 @@ source code.
   help us to redesign and re-implement the required infrastructure in python. 
 - We also thank Francesco Fracchia, for finding and correcting the fitness
   value accuracy for shubert function
+- Many thanks to Ali Ahrari, for finding and correcting a bug in the matlab
+  implementation
 
 --------------------------------------------------------------------------------
 -- LICENSE
