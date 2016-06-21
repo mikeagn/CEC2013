@@ -209,6 +209,8 @@ source code.
   value accuracy for shubert function
 - Many thanks to Ali Ahrari, for finding and correcting a bug in the matlab
   implementation
+- Many thanks to Simon Wessing, for finding and correcting a bug in the python
+  implementation
 
 --------------------------------------------------------------------------------
 -- LICENSE
