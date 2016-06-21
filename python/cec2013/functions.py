@@ -132,7 +132,7 @@ def vincent(x = None):
 	D = len(x)
 
 	for i in range(0, D):
-		result += (math.sin(10*math.log10(x[i])))/D
+		result += (math.sin(10*math.log(x[i])))/D
 	return result
 
 ###############################################################################
