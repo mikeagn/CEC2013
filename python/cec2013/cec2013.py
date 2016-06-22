@@ -39,11 +39,12 @@ class CEC2013(object):
 			self.__f_ = self.__functions_[self.__nfunc_]( self.get_dimension() )
 
 	def evaluate(self, x):
-		assert (len(x) == self.get_dimension())
+                x_ = np.asarray(x)
+		assert (len(x_) == self.get_dimension())
 		if (self.__nfunc_ > 0 and self.__nfunc_ < 11): 
-			return self.__f_(x)
+			return self.__f_(x_)
 		else:
-			return self.__f_.evaluate(x)
+			return self.__f_.evaluate(x_)
 
 	def get_lbound(self, n):
 		assert (n >= 0 and n <self.__dimensions_[self.__nfunc_-1])
