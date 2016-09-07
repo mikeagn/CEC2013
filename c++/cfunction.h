@@ -15,14 +15,17 @@
 #include <cstdlib>
 #include <cmath>
 #include <algorithm>
-#include <values.h>
+//#include <values.h>
+#include <limits.h>
+#include <float.h>
 #include <cassert>
 //TODO: random number generator
 #include "rand2.h"
 
 /* Just to define M_PI */
 #define _USE_MATH_DEFINES
-#define INF MAXDOUBLE
+//#define INF MAXDOUBLE
+#define INF DBL_MAX
 
 /* Define tFitness */
 #ifndef _TFITNESS 
