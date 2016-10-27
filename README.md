@@ -7,8 +7,8 @@ Benchmark Functions for CEC'2013 Special Session and Competition on Niching Meth
 *Developers : Michael G. Epitropakis and Xiaodong Li*
 
 Please refer to:
-- http://goanna.cs.rmit.edu.au/~xiaodong/cec13-niching/
-- http://goanna.cs.rmit.edu.au/~xiaodong/cec13-niching/competition/
+- https://titan.csit.rmit.edu.au/~e46507/cec13-niching/
+- https://titan.csit.rmit.edu.au/~e46507/cec13-niching/competition/
 
 
 If you are using any material from the current competition please cite the
@@ -116,6 +116,9 @@ The matlab folder contains:
 |
 + get_ub.m
 |-- 	For each function, get the upper bounds of the optimization box
+|
++ get_copy_of_goptima.m
+|-- 	For each function, get the positions of the global optima
 </pre>
 
 --------------------------------------------------------------------------------
@@ -210,6 +213,8 @@ source code.
 - Many thanks to Ali Ahrari, for finding and correcting a bug in the matlab
   implementation
 - Many thanks to Simon Wessing, for finding and correcting a bug in the python
+  implementation
+- Many thanks to André L. Maravilha, for finding a bug in the MATLAB
   implementation
 
 --------------------------------------------------------------------------------
