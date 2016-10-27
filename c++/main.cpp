@@ -104,6 +104,34 @@ int main()
 		<< how_many_goptima(pop, seeds, pFunc, accuracy, pFunc->get_rho()) 
 		<< " global optimizers." << endl;
 
+//	/* Example usage for getting the global optima *only* for statistical purposes */
+//	typedef std::vector< std::vector<double> > Array2D;
+//
+//	/* Iterate through functions */
+//	cout << "Global optima per problem: " << endl;
+//	CEC2013 *pFunc_gopt;
+//	for (int index=1; index<=20; ++index) {
+//		/* Create problem */
+//		pFunc_gopt = new CEC2013(index);
+//		cout << "Problem: " << index << endl;
+//
+//		/* Get optima */
+//		Array2D goptima = pFunc_gopt->get_copy_of_goptima();
+//		cout << "SIZE: " << goptima.size() << endl;
+//		for (Array2D::iterator it = goptima.begin(); it != goptima.end(); ++it) {
+//			//evaluate optimum
+//			cout << "Fitness: " << pFunc_gopt->evaluate(*it) << " f: " << pFunc_gopt->get_fitness_goptima() << "\tGene:\t";
+//			for (std::vector<double>::iterator jt = it->begin();
+//					jt != it->end(); ++jt) {
+//				cout << *jt << "\t";
+//			}
+//			cout << endl;
+//		}
+//
+//		/* Clean up */
+//		delete pFunc_gopt;
+//	}
+
 	/* Clean up */
 	delete pFunc;
 	

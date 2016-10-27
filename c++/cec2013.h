@@ -30,6 +30,7 @@ public:
 	int get_no_goptima() const { return nopt_[nfunc_-1]; }
 	double get_rho() const { return rho_[nfunc_-1]; }
 	int get_maxfes() const { return maxfes_[nfunc_-1]; }
+	std::vector< std::vector<double> > get_copy_of_goptima() const;
 private:
 	/*Specific function dimensions for the competition */
 	int nfunc_;
@@ -41,6 +42,11 @@ private:
 	long maxfes_[20];
 
 	void init_vars_();
+
+	// save global optima positions *only* for statistics
+	std::vector< std::vector<double> > goptima_;
+	void load_goptima();
+	void load_goptima(const std::string &filename);
 };
 int how_many_goptima(std::vector< std::vector<double> > pop, 
 		std::vector< std::vector<double> > &seeds, CEC2013 *pFunc,

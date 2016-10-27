@@ -15,6 +15,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <algorithm>
+#include <vector>
 //#include <values.h>
 #include <limits.h>
 #include <float.h>
@@ -85,6 +86,8 @@ protected:
 	void transform_to_z_noshift(const double *x, const int &index);
 	void calculate_fmaxi();
 	tFitness evaluate_inner_(const double *x);
+	std::vector< std::vector<double> > get_copy_of_goptima() const;
+	friend class CEC2013;
 };
 /* Basic Benchmark functions */
 tFitness five_uneven_peak_trap(const double *x, const int &dim);

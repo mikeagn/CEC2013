@@ -277,6 +277,22 @@ tFitness CFunction::evaluate_inner_(const double *x)
 	return result * minmax() + f_bias_;
 }
 
+std::vector< std::vector<double> > CFunction::get_copy_of_goptima() const
+{
+	assert(O_ != NULL && "O_ == NULL");
+	std::vector< std::vector<double> > OO;
+
+	for (int i=0; i< nofunc_; ++i) {
+		std::vector<double> kk;
+		for (int j=0; j< dimension_; ++j) {
+			kk.push_back(O_[i][j]);
+		}
+		OO.push_back(kk);
+	}
+	return OO;
+}
+
+
 CF1::CF1(const int dim) : CFunction(dim, 6)
 {
 	for (int i=0; i<nofunc_; ++i) {

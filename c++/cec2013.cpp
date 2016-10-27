@@ -11,7 +11,7 @@
 using namespace std;
 
 CEC2013::CEC2013(const int &nfunc) :
-	nfunc_(0), cfunc_(NULL)
+	nfunc_(0), cfunc_(NULL), goptima_()
 {
 	assert(nfunc>0 && nfunc<=20);
 	nfunc_ = nfunc;
@@ -26,6 +26,8 @@ CEC2013::CEC2013(const int &nfunc) :
 	} else if (nfunc_ == 15 || nfunc_ == 17 || nfunc_ == 19 || nfunc_ == 20 ) {
 		cfunc_ = new CF4(dimensions_[nfunc_-1]);
 	}
+
+	load_goptima();
 }
 
 CEC2013::~CEC2013()
@@ -259,3 +261,63 @@ double get_eudist(std::vector<double> &v1, std::vector<double> &v2)
 	return sqrt(res);
 }
 
+void CEC2013::load_goptima() 
+{
+	if (nfunc_ > 10) {
+		goptima_ = cfunc_->get_copy_of_goptima();
+		return;
+	} 
+	std::string filename;
+	if (nfunc_ == 1) {
+		filename = "data/F1_opt.dat";
+	} else if (nfunc_ == 2) {
+		filename = "data/F2_opt.dat";
+	} else if (nfunc_ == 3) {
+		filename = "data/F3_opt.dat";
+	} else if (nfunc_ == 4) {
+		filename = "data/F4_opt.dat";
+	} else if (nfunc_ == 5) {
+		filename = "data/F5_opt.dat";
+	} else if (nfunc_ == 6) {
+		filename = "data/F6_2D_opt.dat";
+	} else if (nfunc_ == 8) {
+		filename = "data/F6_3D_opt.dat";
+	} else if (nfunc_ == 7) {
+		filename = "data/F7_2D_opt.dat";
+	} else if (nfunc_ == 9) {
+		filename = "data/F7_3D_opt.dat";
+	} else if (nfunc_ == 10) {
+		filename = "data/F8_2D_opt.dat";
+	}
+	load_goptima(filename);
+}
+
+void CEC2013::load_goptima(const std::string &filename)
+{
+	std::ifstream file;
+	file.open(filename.c_str(), std::fstream::in);
+	if (!file.is_open()) {
+		cerr<< "Error: Can not open file: " << filename << endl;
+		//exit(-1);
+	}
+	std::string line;
+	while (std::getline(file, line)) {
+		std::istringstream iss(line);
+		vector<double> indi;
+		double tmp;
+		for (int i=0; i<dimensions_[nfunc_-1]; ++i) {
+			iss >> tmp;
+			indi.push_back(tmp);
+			//cout << tmp << "\t";
+		}
+		goptima_.push_back(indi);
+		//cout << endl;
+	}
+	// Close file
+	file.close();
+}
+
+std::vector< std::vector<double> > CEC2013::get_copy_of_goptima() const
+{
+	return std::vector< std::vector<double> >(goptima_);
+}
