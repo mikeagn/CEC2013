@@ -1,0 +1,40 @@
+The following instructions work under Linux/OSX systems. The requirements for
+running the analyses are: 
+- a C++ compiler (GCC/LLVM) and 
+- R project
+
+To evaluate different algorithms for the competition, please follow the steps
+bellow:
+
+For each algorithm that you need to compare: 
+
+- Add the submission files in the submissions/ALGORITHM_NAME folder, where
+  ALGORITHM_NAME is the algorithm name. For example within the
+  submissions/cma/ there are 1000 files as per the GECCO competition
+  instructions, e.g., submissions/cma/problem001run001.dat
+
+We need to compile the data parser to re-evaluate all solutions within the
+different folders under the submissions/ folder. 
+
+```
+cd data-parser/
+make clean all
+chmod +x parse-data.sh
+./parse-data.sh
+```
+
+Now everything is ready for the analyses. Go back in the main folder and run
+the analyses.
+
+```
+cd ..
+```
+
+Run the analyses R script:
+```
+Rscript RunMe.R
+```
+
+Under the figs/ folder you will find various figures for all scenarios and
+under the results/ folder you can find the average scores for all scenarios as
+well as all data for scenario 3 for performing further analysis.
