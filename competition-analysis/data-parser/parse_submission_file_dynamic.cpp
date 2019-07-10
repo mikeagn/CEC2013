@@ -139,7 +139,7 @@ int main(int argc, char **argv)
 				int number_of_goptima = pFunc->get_no_goptima();
 				file << p.algname << "," << "prob" << index << "," << irun << ",";
 				file << data[ii][data[ii].size()-3] << "," << data[ii][data[ii].size()-2] << ",";
-				for (int iii=0; iii < res.size(); iii++) {
+				for (unsigned int iii=0; iii < res.size(); iii++) {
 					file << res[iii] << ",";
 				}
 				file << number_of_goptima <<"," << cpop.size() << endl;

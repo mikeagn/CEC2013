@@ -12,7 +12,7 @@ maxRL = c(5E4,5E4,5E4,5E4,5E4,
 budget <- data.table(FEs=maxRL)
 budget[,problem:=paste0("prob",.I)]
 
-DT <- fread(file="data-parser2/alldata-dynamic.csv", sep=",", header=T)
+DT <- fread(file="data-parser/alldata-dynamic.csv", sep=",", header=T)
 setnames(DT, 1, "algorithm")
 setnames(DT, "numberGO", "GO")
 # Ensure that values are sorted correctly
