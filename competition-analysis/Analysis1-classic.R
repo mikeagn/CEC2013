@@ -1,9 +1,13 @@
-DT <- fread(file="data-parser/alldata-static.csv", header=T)
-setnames(DT,1,"algorithm")
-setnames(DT,"numberGO","GO")
+library(data.table)
+library(ggplot2)
+
+data <- fread(file="data-parser/alldata-static.csv", header=T)
+setnames(data, 1, "algorithm")
+setnames(data, "numberGO", "GO")
 
 accuracy_levels <-  c(0.1, 0.01, 0.001, 0.0001, 0.00001)
 
+DT <- unique(data[,.(numGOacc0,numGOacc1, numGOacc2, numGOacc3, numGOacc4,  GO), by=.(algorithm,problem, run)])
 # calculate PR per accuracy level
 DT[, PR0:=numGOacc0/GO, by=list(algorithm,problem)]
 DT[, PR1:=numGOacc1/GO, by=list(algorithm,problem)]
@@ -119,3 +123,4 @@ print(bp)
 cairo_pdf("figs/bp-pr-acc5.pdf",bg = "transparent")
 print(bp)
 dev.off()
+

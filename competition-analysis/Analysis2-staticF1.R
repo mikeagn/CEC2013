@@ -1,3 +1,6 @@
+library(data.table)
+library(ggplot2)
+
 accuracy_levels <-  c(0.1, 0.01, 0.001, 0.0001, 0.00001)
 nruns <- 50
 nproblems <- 20
@@ -53,9 +56,15 @@ DT[, precision4:=numGOacc4/SO, by=list(algorithm,problem,run)]
 DT[, recall4:=numGOacc4/GO, by=list(algorithm,problem,run)]
 DT[, F14:=F1(precision4, recall4), by=list(algorithm,problem,run)]
 
-DTF1All <- DT[,.(algorithm,F10,F11,F12,F13,F14)]
+DTF1All <- unique(DT[,.(F10,F11,F12,F13,F14), by=.(algorithm,problem, run)])
+DTAll <- unique(DT[,.(F10,F11,F12,F13,F14,
+                      precision0,recall0,
+                      precision1,recall1,
+                      precision2,recall2,
+                      precision3,recall3,
+                      precision4,recall4), by=.(algorithm,problem, run)])
 
-DTF1All_melted <- melt(DTF1All, id.vars = c("algorithm"))
+DTF1All_melted <- melt(DTF1All, id.vars = c("algorithm","problem", "run"))
 finalMeanRanking <- DTF1All_melted[, .(meanF1 = mean(value)), by=.(algorithm)]
 
 print(finalMeanRanking)
@@ -68,7 +77,7 @@ fbeta <- function(beta, precision, recall){
 }
 
 # boxplot of F1 acc 0
-bp <- ggplot(DT)+ 
+bp <- ggplot(DTAll)+ 
   geom_boxplot(notch=F, aes(x=factor(algorithm), y=F10,fill = factor(algorithm) ) ) + 
   theme(text = element_text(size=20)) +
   stat_summary(aes(x=factor(algorithm), y=F10), fun.y = "mean", geom = "point", shape= 23, size= 3, fill= "red") +
@@ -84,7 +93,7 @@ print(bp)
 dev.off()
 
 # boxplot of precision acc 0
-bp <- ggplot(DT)+ 
+bp <- ggplot(DTAll)+ 
   geom_boxplot(notch=F, aes(x=factor(algorithm), y=precision0,fill = factor(algorithm) ) ) + 
   theme(text = element_text(size=20)) +
   stat_summary(aes(x=factor(algorithm), y=precision0), fun.y = "mean", geom = "point", shape= 23, size= 3, fill= "red") +
@@ -100,7 +109,7 @@ print(bp)
 dev.off()
 
 # boxplot of recall acc 0
-bp <- ggplot(DT)+ 
+bp <- ggplot(DTAll)+ 
   geom_boxplot(notch=F, aes(x=factor(algorithm), y=recall0,fill = factor(algorithm) ) ) + 
   theme(text = element_text(size=20)) +
   stat_summary(aes(x=factor(algorithm), y=recall0), fun.y = "mean", geom = "point", shape= 23, size= 3, fill= "red") +
@@ -116,7 +125,7 @@ print(bp)
 dev.off()
 
 # boxplot of F1 acc 1
-bp <- ggplot(DT)+ 
+bp <- ggplot(DTAll)+ 
   geom_boxplot(notch=F, aes(x=factor(algorithm), y=F11,fill = factor(algorithm) ) ) + 
   theme(text = element_text(size=20)) +
   stat_summary(aes(x=factor(algorithm), y=F11), fun.y = "mean", geom = "point", shape= 23, size= 3, fill= "red") +
@@ -132,7 +141,7 @@ print(bp)
 dev.off()
 
 # boxplot of precision acc 1
-bp <- ggplot(DT)+ 
+bp <- ggplot(DTAll)+ 
   geom_boxplot(notch=F, aes(x=factor(algorithm), y=precision1,fill = factor(algorithm) ) ) + 
   theme(text = element_text(size=20)) +
   stat_summary(aes(x=factor(algorithm), y=precision1), fun.y = "mean", geom = "point", shape= 23, size= 3, fill= "red") +
@@ -148,7 +157,7 @@ print(bp)
 dev.off()
 
 # boxplot of recall acc 1
-bp <- ggplot(DT)+ 
+bp <- ggplot(DTAll)+ 
   geom_boxplot(notch=F, aes(x=factor(algorithm), y=recall1,fill = factor(algorithm) ) ) + 
   theme(text = element_text(size=20)) +
   stat_summary(aes(x=factor(algorithm), y=recall1), fun.y = "mean", geom = "point", shape= 23, size= 3, fill= "red") +
@@ -164,7 +173,7 @@ print(bp)
 dev.off()
 
 # boxplot of F1 acc 2
-bp <- ggplot(DT)+ 
+bp <- ggplot(DTAll)+ 
   geom_boxplot(notch=F, aes(x=factor(algorithm), y=F12,fill = factor(algorithm) ) ) + 
   theme(text = element_text(size=20)) +
   stat_summary(aes(x=factor(algorithm), y=F12), fun.y = "mean", geom = "point", shape= 23, size= 3, fill= "red") +
@@ -180,7 +189,7 @@ print(bp)
 dev.off()
 
 # boxplot of precision acc 2
-bp <- ggplot(DT)+ 
+bp <- ggplot(DTAll)+ 
   geom_boxplot(notch=F, aes(x=factor(algorithm), y=precision2,fill = factor(algorithm) ) ) + 
   theme(text = element_text(size=20)) +
   stat_summary(aes(x=factor(algorithm), y=precision2), fun.y = "mean", geom = "point", shape= 23, size= 3, fill= "red") +
@@ -196,7 +205,7 @@ print(bp)
 dev.off()
 
 # boxplot of recall acc 2
-bp <- ggplot(DT)+ 
+bp <- ggplot(DTAll)+ 
   geom_boxplot(notch=F, aes(x=factor(algorithm), y=recall2,fill = factor(algorithm) ) ) + 
   theme(text = element_text(size=20)) +
   stat_summary(aes(x=factor(algorithm), y=recall2), fun.y = "mean", geom = "point", shape= 23, size= 3, fill= "red") +
@@ -212,7 +221,7 @@ print(bp)
 dev.off()
 
 # boxplot of F1 acc 3
-bp <- ggplot(DT)+ 
+bp <- ggplot(DTAll)+ 
   geom_boxplot(notch=F, aes(x=factor(algorithm), y=F13,fill = factor(algorithm) ) ) + 
   theme(text = element_text(size=20)) +
   stat_summary(aes(x=factor(algorithm), y=F13), fun.y = "mean", geom = "point", shape= 23, size= 3, fill= "red") +
@@ -228,7 +237,7 @@ print(bp)
 dev.off()
 
 # boxplot of precision acc 2
-bp <- ggplot(DT)+ 
+bp <- ggplot(DTAll)+ 
   geom_boxplot(notch=F, aes(x=factor(algorithm), y=precision3,fill = factor(algorithm) ) ) + 
   theme(text = element_text(size=20)) +
   stat_summary(aes(x=factor(algorithm), y=precision3), fun.y = "mean", geom = "point", shape= 23, size= 3, fill= "red") +
@@ -244,7 +253,7 @@ print(bp)
 dev.off()
 
 # boxplot of recall acc 3
-bp <- ggplot(DT)+ 
+bp <- ggplot(DTAll)+ 
   geom_boxplot(notch=F, aes(x=factor(algorithm), y=recall3,fill = factor(algorithm) ) ) + 
   theme(text = element_text(size=20)) +
   stat_summary(aes(x=factor(algorithm), y=recall3), fun.y = "mean", geom = "point", shape= 23, size= 3, fill= "red") +
@@ -261,7 +270,7 @@ dev.off()
 
 
 # boxplot of F1 acc 4
-bp <- ggplot(DT)+ 
+bp <- ggplot(DTAll)+ 
   geom_boxplot(notch=F, aes(x=factor(algorithm), y=F14,fill = factor(algorithm) ) ) + 
   theme(text = element_text(size=20)) +
   stat_summary(aes(x=factor(algorithm), y=F14), fun.y = "mean", geom = "point", shape= 23, size= 3, fill= "red") +
@@ -277,7 +286,7 @@ print(bp)
 dev.off()
 
 # boxplot of precision acc 4
-bp <- ggplot(DT)+ 
+bp <- ggplot(DTAll)+ 
   geom_boxplot(notch=F, aes(x=factor(algorithm), y=precision4,fill = factor(algorithm) ) ) + 
   theme(text = element_text(size=20)) +
   stat_summary(aes(x=factor(algorithm), y=precision4), fun.y = "mean", geom = "point", shape= 23, size= 3, fill= "red") +
@@ -293,7 +302,7 @@ print(bp)
 dev.off()
 
 # boxplot of recall acc 4
-bp <- ggplot(DT)+ 
+bp <- ggplot(DTAll)+ 
   geom_boxplot(notch=F, aes(x=factor(algorithm), y=recall4,fill = factor(algorithm) ) ) + 
   theme(text = element_text(size=20)) +
   stat_summary(aes(x=factor(algorithm), y=recall4), fun.y = "mean", geom = "point", shape= 23, size= 3, fill= "red") +
