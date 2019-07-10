@@ -1,18 +1,31 @@
+library(data.table)
+library(ggplot2)
+library(progress)
+
 nruns <- 50
 accuracy_levels <-  c(0.1, 0.01, 0.001, 0.0001, 0.00001)
-maxRL = c(5E4,5E4,5E4,5E4,5E4, 2E5,2E5,2E5,2E5, 4E5,4E5, 2E5,2E5,2E5,2E5, 4E5,4E5,4E5,4E5,4E5)
+maxRL = c(5E4,5E4,5E4,5E4,5E4, 
+          2E5,2E5,
+          4E5,4E5, 
+          2E5,2E5,2E5,2E5,
+          4E5,4E5,4E5,4E5,4E5,4E5,4E5)
+budget <- data.table(FEs=maxRL)
+budget[,problem:=paste0("prob",.I)]
 
-DT <- fread(file="data-parser/alldata-dynamic.csv", sep=",", header=T)
+DT <- fread(file="data-parser2/alldata-dynamic.csv", sep=",", header=T)
 setnames(DT, 1, "algorithm")
 setnames(DT, "numberGO", "GO")
+# Ensure that values are sorted correctly
+setkeyv(DT, c("algorithm","problem", "run", "fes"))
+DT[, SO:= as.integer(popsize)]
 
 algorithms <- unique(DT[,algorithm])
 probNames <- unique(DT[,problem])
 nproblems <- length(probNames)
 
 F1 <- function(precision, recall){ 
-	if( (precision==0) && (recall==0) ) return(0)
-	return(2*(precision * recall)/(precision + recall)) 
+  if( (precision==0) && (recall==0) ) return(0)
+  return(2*(precision * recall)/(precision + recall)) 
 }
 ### F1 produces a lot of NaNs if recall==0 and precision==0, set to 0 manually 
 
@@ -30,15 +43,7 @@ F1 <- function(precision, recall){
 # TGOSOX (X <- acc) = |relevant documents ^ retrieved documents| == numGOaccX
 # F1 = 2*(precision * recall)/(precision + recall)
 
-# counts unique 
-func.go.per.acc.run <- function(acc, fitness, fitnessGO, idxdist, GO) {
-  koko <- (fitnessGO-fitness) < acc
-  popo <- idxdist[koko]
-  return(1.0*length(unique(popo))/GO)
-}
-
-
-# compute dynamic F1/AUC, takes preselected data for alg, prob, run
+# compute dynamic F1/AUC, takes preselected data for alg, prob, run (right Riemann sum)
 dynamicF1 <- function(subDT, acc, probName, algName) {
   lastTime=0
   f1sum=0
@@ -64,7 +69,7 @@ dynamicF1 <- function(subDT, acc, probName, algName) {
       }
       
       # compute temporary F1
-      precision = numGOacc / lineNo
+      precision = numGOacc / subDT[lineNo,SO]
       recall = numGOacc / GO
       f1part = F1( precision, recall )
       f1sum = f1sum + ((subDT[lineNo, fes] - lastTime)) * f1part
@@ -80,10 +85,52 @@ dynamicF1 <- function(subDT, acc, probName, algName) {
   }
 }
 
+# compute dynamic F1/AUC, takes preselected data for alg, prob, run (left Riemann sum)
+dynamicF1v2 <- function(subDT, acc, probName, algName, probBudget) {
+  lastTime=0
+  f1sum=0
+  f1part=0
+  
+  subDTrows = nrow(subDT)	
+  if( subDTrows > 0 ) {
+    
+    GO = subDT[1,GO]
+    for( lineNo in 1:subDTrows ) {  
+      
+      # find appropriate accuracy value
+      if( acc==0.1 ) {
+        numGOacc = subDT[lineNo,numGOacc0]
+      } else if( acc==0.01 ) {
+        numGOacc = subDT[lineNo,numGOacc1]
+      } else if( acc==0.001 ) {
+        numGOacc = subDT[lineNo,numGOacc2]
+      } else if( acc==0.0001 ) {
+        numGOacc = subDT[lineNo,numGOacc3]
+      } else if( acc==0.00001 ) {
+        numGOacc = subDT[lineNo,numGOacc4]
+      }
+      
+      # compute temporary F1
+      precision = numGOacc / subDT[lineNo,SO]
+      recall = numGOacc / GO
+      f1part = F1( precision, recall )
+      if (lineNo == subDTrows) {
+        f1sum <- f1sum + f1part * (probBudget - subDT[lineNo, fes]) / probBudget
+      } else {
+        f1sum <- f1sum + f1part * (subDT[lineNo+1, fes] - subDT[lineNo, fes]) / probBudget
+      }
+    }
+    return(f1sum)
+  } else {
+    #print(paste("WARNING! empty data for alg ", algName, ", prob ", probName, ", run ", runNo))
+    return(0)
+  }
+}
+
 # set up data frame for detailed results 
 results <- data.frame(algorithm=character(), problem=character(), run=integer(), acc1=double(), 
-				acc2=double(), acc3=double(), acc4=double(), acc5=double(),
-                 stringsAsFactors=FALSE) 
+                      acc2=double(), acc3=double(), acc4=double(), acc5=double(),
+                      stringsAsFactors=FALSE) 
 
 pb <- progress_bar$new(
   format = "(:spin) [:bar] :percent",
@@ -92,36 +139,41 @@ pb <- progress_bar$new(
 aucresults <- data.table()
 # algorithm loop: sum everything up
 for( alg in algorithms ) {
-	counter = 0
-	aucSum = 0
-	for( prob in probNames ) {
-		for( runNo in 0:(nruns-1) ) {
-			# print(paste("Algorithm:", alg,"problem:", prob, "run:", runNo))
-			accSums = rep(0, length(accuracy_levels))
-			# same data for all accuracy levels
-			subDT = subset(DT, algorithm==alg & problem==prob & run==runNo )   
+  counter = 0
+  aucSum = 0
 
-			accNum = 1
-			for( accu in accuracy_levels ) {
-				counter = counter + 1
-				tmp = dynamicF1(subDT, acc=accu, probName=prob, algName=alg)
-				aucSum = aucSum + tmp
-				accSums[accNum] = accSums[accNum] + tmp
-				accNum = accNum + 1
-			}	
-			results[nrow(results)+1,] = c(alg, prob, runNo, accSums[1], accSums[2], accSums[3], accSums[4], accSums[5])
-		}
-	  pb$tick()
-	}
-	aucAvg = aucSum / counter
-	# print(paste("aucAvg for alg", alg, ":", aucAvg))
-	aucresults <- rbind(aucresults, data.table(algorithm=alg, AUCAvg=aucAvg))
+  for( prob in probNames ) {
+    probBudget <- budget[prob == problem]$FEs
+    for( runNo in 0:(nruns-1) ) {
+      accSums = rep(0, length(accuracy_levels))
+      # same data for all accuracy levels
+      subDT = subset(DT, algorithm==alg & problem==prob & run==runNo )   
+      
+      accNum = 1
+      for( accu in accuracy_levels ) {
+        counter = counter + 1
+        tmp = dynamicF1v2(subDT, acc=accu, probName=prob, algName=alg, probBudget = probBudget)
+        aucSum = aucSum + tmp
+        accSums[accNum] = accSums[accNum] + tmp
+        accNum = accNum + 1
+      }	
+      results[nrow(results)+1,] = c(alg, prob, runNo, accSums[1], accSums[2], accSums[3], accSums[4], accSums[5])
+    }
+    pb$tick()
+  }
+  aucAvg = aucSum / counter
+  aucresults <- rbind(aucresults, data.table(algorithm=alg, AUCAvg=aucAvg))
 }
 print(aucresults)
 results.dynF1 <- copy(aucresults)
 fwrite(aucresults, "results/Analysis3-dynamicF1-mean-AUC-all-acc.csv", quote=FALSE, row.names = FALSE)
 
 DTResults <- data.table(results)
+DTResults[, acc1:= as.numeric(acc1)]
+DTResults[, acc2:= as.numeric(acc1)]
+DTResults[, acc3:= as.numeric(acc1)]
+DTResults[, acc4:= as.numeric(acc1)]
+DTResults[, acc5:= as.numeric(acc1)]
 fwrite(DTResults, "results/Analysis3-dynamicF1-data.csv", quote=FALSE, row.names = FALSE)
 
 accuracy_levels <-  c(0.1, 0.01, 0.001, 0.0001, 0.00001)
