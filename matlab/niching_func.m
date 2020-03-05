@@ -204,19 +204,19 @@ fit = -sum( 10 + 9*cos( 2*pi*MMP.*x ) );
 %1. Composition Function 1, n=6
 %==============================================================================
 function fit = CF1(x)
-global initial_flag
-persistent func_num func o sigma lambda bias M
+persistent func_num func o sigma lambda bias M initial_flag dim
 
 [ps,D] = size(x);
 func_num = 6;
 lb = -5; ub = 5;
-if initial_flag==0
+if initial_flag==0 || D ~= dim % if run this function for the first time or run the same function with different dimensions of x
 	load data/optima.mat % saved the predefined optima
 	if length( o(1,:) ) >= D
 		o = o(:,1:D);
 	else
 		o = lb + (ub - lb) * rand(func_num,D);
 	end
+	dim = size(o,2); % record the dimension
 	initial_flag=1;
 	func.f1 = str2func('FGriewank');
 	func.f2 = str2func('FGriewank');
@@ -238,20 +238,20 @@ fit = hybrid_composition_func(x, func_num, func, o, sigma, lambda, bias, M);
 %2. Composition Function 2, n=8
 %==============================================================================
 function fit = CF2(x)
-global initial_flag
-persistent func_num func o sigma lambda bias M
+persistent func_num func o sigma lambda bias M initial_flag dim
 
 [ps,D] = size(x);
 func_num = 8;
 lb = -5; ub = 5;
-if initial_flag==0
+if initial_flag==0 || D ~= dim % if run this function for the first time or run the same function with different dimensions of x
 	initial_flag=1;
 	load data/optima.mat % saved the predefined optima
 	if length( o(1,:) ) >= D
-		o = o(:,1:D);
+		o = o(:,1:D); q
 	else
 		o = lb + (ub - lb) * rand(func_num,D);
 	end
+	dim = size(o,2); % record the dimension
 	func.f1 = str2func('FRastrigin');
 	func.f2 = str2func('FRastrigin');
 	func.f3 = str2func('FWeierstrass');
@@ -274,13 +274,12 @@ fit = hybrid_composition_func(x, func_num, func, o, sigma, lambda, bias, M);
 %3. Composition Function 3, n=6
 %==============================================================================
 function fit = CF3(x)
-global initial_flag
-persistent func_num func o sigma lambda bias M
+persistent func_num func o sigma lambda bias M initial_flag dim
 
 [ps,D] = size(x);
 func_num = 6;
 lb = -5; ub = 5;
-if initial_flag==0
+if initial_flag==0 || D ~= dim % if run this function for the first time or run the same function with different dimensions of x
 	initial_flag=1;
 	load data/optima.mat % saved the predefined optima, a 10*100 matrix;
 	if length( o(1,:) ) >= D
@@ -288,6 +287,7 @@ if initial_flag==0
 	else
 		o = lb + (ub - lb) * rand(func_num,D);
 	end
+	dim = size(o,2); % record the dimension
 	func.f1 = str2func('FEF8F2');
 	func.f2 = str2func('FEF8F2');
 	func.f3 = str2func('FWeierstrass');
@@ -318,13 +318,12 @@ fit = hybrid_composition_func(x,func_num,func,o,sigma,lambda,bias,M);
 %4. Composition Function 4, n=8
 %==============================================================================
 function fit = CF4(x)
-global initial_flag
-persistent func_num func o sigma lambda bias M
+persistent func_num func o sigma lambda bias M initial_flag dim
 
 [ps,D] = size(x);
 func_num = 8;
 lb = -5; ub = 5;
-if initial_flag==0
+if initial_flag==0 || D ~= dim % if run this function for the first time or run the same function with different dimensions of x
 	initial_flag=1;
 	load data/optima.mat % saved the predefined optima, a 10*100 matrix;
 	if length( o(1,:) ) >= D
@@ -332,6 +331,7 @@ if initial_flag==0
 	else
 		o = lb + (ub - lb) * rand(func_num,D);
 	end
+	dim = size(o,2); % record the dimension
 	func.f1 = str2func('FRastrigin');
 	func.f2 = str2func('FRastrigin');
 	func.f3 = str2func('FEF8F2');
