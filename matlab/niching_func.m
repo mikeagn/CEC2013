@@ -247,7 +247,7 @@ if initial_flag==0 || D ~= dim % if run this function for the first time or run 
 	initial_flag=1;
 	load data/optima.mat % saved the predefined optima
 	if length( o(1,:) ) >= D
-		o = o(:,1:D); q
+		o = o(:,1:D);
 	else
 		o = lb + (ub - lb) * rand(func_num,D);
 	end
