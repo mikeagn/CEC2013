@@ -2,7 +2,7 @@ Benchmark Functions for CEC'2013 Special Session and Competition on Niching Meth
 ========================================================================================================================
 *Organizers : Xiaodong Li, Andries Engelbrecht, and Michael G. Epitropakis*
 
-*Version    : 1.1*
+*Version    : 1.2*
 
 *Developers : Michael G. Epitropakis and Xiaodong Li*
 
@@ -72,11 +72,17 @@ structure:
    |   |
    |   +- CEC2013	Project files
    |
-   +-- python	Source code of the benchmark functions in python
-       |
-       +- CEC2013	Project files
-       |
-       +- data		Data files for the benchmark suite 
+   +-- python	Source code of the benchmark functions in python (v 2)
+   |   |
+   |   +- CEC2013	Project files
+   |   |
+   |   +- data		Data files for the benchmark suite 
+   +-- python3	Source code of the benchmark functions in python3
+   |   |
+   |   +- CEC2013	Project files
+   |   |
+   |   +- data		Data files for the benchmark suite 
+   +-- GECCO-all-results-2016-2019   Scripts for calculating performance measures for the three scenarios of the GECCO competition
 </pre>
 
 --------------------------------------------------------------------------------
@@ -190,7 +196,24 @@ the Plots.java file.
 
 The python folder contains all necessary files to use the competition function
 set. Please follow the demonstration file demo.py on how to use the
-source code. 
+source code. Support for python ^2.7 versions
+
+--------------------------------------------------------------------------------
+-- python3:
+--------------------------------------------------------------------------------
+
+The python3 folder contains all necessary files to use the competition function
+set. Please follow the demonstration file demo.py on how to use the
+source code. This is the python3 version of the competition. 
+
+--------------------------------------------------------------------------------
+-- GECCO-all-results-2016-2019:
+--------------------------------------------------------------------------------
+
+The folder contains R scripts for calculating the competition performance
+metrics of all participants on all three scenarios as described in the GECCO
+series competitions.
+
 
 --------------------------------------------------------------------------------
 -- ACKNOWLEDGEMENT: 
