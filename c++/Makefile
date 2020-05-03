@@ -26,4 +26,4 @@ rand2.o: rand2.c rand2.h
 	$(CC) $(CFLAGS) -c rand2.c
 
 clean:
-	-rm -f *.o *~ core a.out 
+	-rm -r -f *.o *~ core a.out a.out.dSYM
