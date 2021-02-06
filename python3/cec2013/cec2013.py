@@ -186,11 +186,11 @@ class CEC2013(object):
 
     def get_info(self):
         return {
-            "fbest": get_fitness_goptima(),
-            "dimension": get_dimension(),
-            "nogoptima": get_no_goptima(),
-            "maxfes": get_maxfes(),
-            "rho": get_rho(),
+            "fbest": self.get_fitness_goptima(),
+            "dimension": self.get_dimension(),
+            "nogoptima": self.get_no_goptima(),
+            "maxfes": self.get_maxfes(),
+            "rho": self.get_rho(),
         }
 
 
